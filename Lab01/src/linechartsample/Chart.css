@@ -1,0 +1,13 @@
+.chart {
+    -fx-padding: 10px;
+    -fx-background-color: lightcyan;
+}
+.chart-content {
+    -fx-padding: 30px;
+}
+.chart-legend {
+   -fx-padding: 20px;
+}
+.chart-legend-item{
+    -fx-text-fill: #191970;
+}
