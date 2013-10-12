@@ -1,6 +1,6 @@
 .chart {
     -fx-padding: 10px;
-    -fx-background-color: lightcyan;
+    -fx-background-color: lightgrey;
 }
 .chart-content {
     -fx-padding: 30px;
