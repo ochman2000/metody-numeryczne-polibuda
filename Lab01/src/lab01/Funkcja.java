@@ -38,26 +38,26 @@ public class Funkcja {
 	 * <b>Pierwiastki: </b>	x = 0.3604<br/><br/>
 	 */
 	public static double funkcjaNumer1(double x) {
-		return 3*x + Math.sin(x) - Math.pow(e, x);
+		return 3*x + Math.sin(x) - Math.exp(x);
 	}
 	/**
 	 * <b>Pochodna: </b> -e^x + cos(x) + 3
 	 */
 	public static double pochodnaNumer1(double x) {
-		return 3-Math.pow(e, x)+Math.cos(x);
+		return 3-Math.exp(x)+Math.cos(x);
 	}
 	/**
 	 * <b>Równanie: </b>2e^(-x) - sin(x) = 0<br/>
 	 * <b>Pierwiastki: </b> x = 0.921028<br/><br/>
 	 */
 	public static double funkcjaNumer2(double x) {
-		return 2*Math.pow(e, (-x)) - Math.sin(x);
+		return 2*Math.exp(-x) - Math.sin(x);
 	}
 	/**
 	 * <b>Pochodna: </b> -2 * e^(-x)- cos(x)
 	 */
 	public static double pochodnaNumer2(double x) {
-		return (-2)*Math.pow(e, (-x))-Math.cos(x);
+		return (-2)*Math.exp(-x)-Math.cos(x);
 	}
 	/**
 	 * <b>Równanie: </b> 2^x - 3x = 0 <br/>
