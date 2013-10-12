@@ -5,14 +5,15 @@ public class Obliczenia {
     public Funkcja funkcja;
     public static boolean wariant = false;
     public static final int MAX_ITERACJE = 2000;
-    public static final double START = -2.0;
-    public static final double END = 2.0;
+    public static final double START = 0.0;
+    public static final double END = 0.8;
     public static final double EPSILON = 0.000001;
     public static final double DOKLADNOSC = 0.000001;
 
     public Obliczenia(int nrFunkcji) {
         funkcja = new Funkcja(nrFunkcji);
-//        licz();
+        licz();
+        funkcja = new Funkcja(nrFunkcji);
     }
     public void licz() {
         for (int i = 1; i <= 3; i++) {
@@ -40,7 +41,7 @@ public class Obliczenia {
             y = wybranaFunkcja(x);
             x = x + 0.0001;
             count++;
-        } while (-0.0001 > y || y > 0.0001);
+        } while (Math.abs(y)<EPSILON);
         System.out.println("Metoda bezmyślnej iteracji:");
         System.out.println("X po " + count + " iteracjach wyniósł: " + x);
         return x;
@@ -87,6 +88,7 @@ public class Obliczenia {
         }
         System.out.println("\nMetoda stycznych:");
         System.out.println("X po " + i + " iteracjach wyniósł: " + x);
+        System.out.println("f("+x+")x wynosi "+ wybranaFunkcja(x));
         return x;
     }
 }

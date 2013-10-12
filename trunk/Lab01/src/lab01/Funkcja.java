@@ -12,9 +12,9 @@ public class Funkcja {
 	public double getFunkcja(double x){
 		switch (index) {
 		case 1:
-			return 3*x + Math.sin(x) - Math.pow(e, x);
+			return 3*x + Math.sin(x) - Math.exp(x);
 		case 2:
-			return 2*Math.pow(e, (-x)) - Math.sin(x);
+			return 2*Math.exp(-x) - Math.sin(x);
 		case 3:
 			return Math.pow(2, x) - 3*x;
 		default:
@@ -24,9 +24,9 @@ public class Funkcja {
 	public double getPochodna(double x){
 		switch (index) {
 		case 1:
-			return 3-Math.pow(e, x)+Math.cos(x);
+			return 3-Math.exp(x)+Math.cos(x);
 		case 2:
-			return (-2)*Math.pow(e, (-x))-Math.cos(x);
+			return (-2)*Math.exp(-x)-Math.cos(x);
 		case 3:
 			return Math.pow(2, x)*Math.log(2)-3;
 		default:
