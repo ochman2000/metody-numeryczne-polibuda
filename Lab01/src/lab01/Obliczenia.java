@@ -16,7 +16,7 @@ public class Obliczenia {
         licz();
         funkcja = new Funkcja(nrFunkcji);
     }
-    public void licz() {
+    public final void licz() {
         for (int i = 1; i <= 3; i++) {
             funkcja = new Funkcja(i);
             System.out.println("-----Równanie numer " + (i) + ": ------");
