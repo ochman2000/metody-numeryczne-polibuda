@@ -4,11 +4,12 @@ public class Obliczenia {
 
     public Funkcja funkcja;
     public static boolean wariant = false;
-    public static final int MAX_ITERACJE = 2000;
-    public static final double START = 0.0;
-    public static final double END = 0.8;
-    public static final double EPSILON = 0.000001;
-    public static final double DOKLADNOSC = 0.000001;
+    public static int MAX_ITERACJE = 2000;
+    public static double START = 0.0;
+    public static double END = 2.0;
+    public static double STEP = 0.1;
+    public static double EPSILON = 0.000001;
+    public static double DOKLADNOSC = 0.000001;
 
     public Obliczenia(int nrFunkcji) {
         funkcja = new Funkcja(nrFunkcji);
@@ -65,7 +66,7 @@ public class Obliczenia {
                 a = m;
             }
             count++;
-//			System.out.println(count + ". Przedział: [" + a + " .. " + b + "]");
+//	System.out.println(count + ". Przedział: [" + a + " .. " + b + "]");
         }
         System.out.println("\nMetoda bisekcji:");
         System.out.println("X po " + count + " iteracjach wyniósł: " + (a + b) / 2);
@@ -76,12 +77,12 @@ public class Obliczenia {
         int i;
         for (i = 0; i < MAX_ITERACJE; i++) {
             double mianownik = wybranaPochodna(x);
-            if (Math.abs(mianownik) < EPSILON) {
+            if (Math.abs(mianownik) < DOKLADNOSC) {
                 System.out.println("UWAGA: mianownik jest zbyt mały.");
                 break;
             }
             double newtonX = x - wybranaFunkcja(x) / mianownik;
-            if (Math.abs(newtonX - x) < DOKLADNOSC) {
+            if (Math.abs(newtonX - x) < EPSILON) {
                 break;
             }
             x = newtonX;
