@@ -36,15 +36,12 @@ public class Lab01 extends Scene {
     private TextField epsilonTextField;
     private TextField iteracjeTextField;
     
-    
 public Lab01(GridPane parent) {
         super(parent, 1200, 675);
         this.grid = parent;       
         initGUI();
-        
     }
     private void initGUI() {
-
         Label startLabel = new Label("        X od:");
         startLabel.setMinWidth(60);
         grid.add(startLabel, 0, 1);

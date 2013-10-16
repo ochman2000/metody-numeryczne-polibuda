@@ -25,14 +25,6 @@ public class Driver extends Application {
         scene.getStylesheets().add("linechartsample/Chart.css"); 
         primaryStage.setScene(scene);
         primaryStage.show();
-//        final Timeline timeline = new Timeline();
-//        timeline.setCycleCount(Timeline.INDEFINITE);
-//        timeline.setAutoReverse(true);
-//        final KeyValue kv = new KeyValue(grid.translateYProperty(), 20);
-//        final KeyFrame kf = new KeyFrame(Duration.millis(500), kv);
-//        timeline.getKeyFrames().add(kf);
-//        timeline.play();
-
     }
     
     private void initLayout() {
@@ -53,7 +45,7 @@ public class Driver extends Application {
      *
      * @param args the command line arguments
      */
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
