@@ -16,7 +16,7 @@ public class Funkcja {
             case 2:
                 return 2 * Math.exp(-x) - Math.sin(x);
             case 3:
-                return Math.pow(2, x) - 3 * x;
+                return Math.sin(x);
             default:
                 return Double.NaN;
         }
@@ -29,7 +29,7 @@ public class Funkcja {
             case 2:
                 return (-2) * Math.exp(-x) - Math.cos(x);
             case 3:
-                return Math.pow(2, x) * Math.log(2) - 3;
+                return Math.cos(x);
             default:
                 return Double.NaN;
         }

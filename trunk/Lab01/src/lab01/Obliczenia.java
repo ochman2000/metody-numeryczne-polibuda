@@ -78,6 +78,15 @@ public class Obliczenia {
     }
 
     public double metodaStycznych(double x) {
+      double y=metodaStycznychHelper(x);
+      if(y<=START && y<=END ){
+          return y;
+      }
+      else {
+          return metodaStycznychHelper(END);
+      }
+    }
+    private double metodaStycznychHelper(double x) {
         int i;
         for (i = 0; i < MAX_ITERACJE; i++) {
             double mianownik = wybranaPochodna(x);
@@ -97,7 +106,6 @@ public class Obliczenia {
         System.out.println("f("+x+")x wynosi "+ zero);
         return x;
     }
-    
     static public String customFormat(String pattern, double value ) {
       DecimalFormat myFormatter = new DecimalFormat(pattern);
       myFormatter.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.ENGLISH));
