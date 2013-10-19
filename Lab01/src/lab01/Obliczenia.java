@@ -1,5 +1,9 @@
 package lab01;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 public class Obliczenia {
 
     public Funkcja funkcja;
@@ -89,7 +93,15 @@ public class Obliczenia {
         }
         System.out.println("\nMetoda stycznych:");
         System.out.println("X po " + i + " iteracjach wyniósł: " + x);
-        System.out.println("f("+x+")x wynosi "+ wybranaFunkcja(x));
+        String zero = customFormat("###.#######################", wybranaFunkcja(x));
+        System.out.println("f("+x+")x wynosi "+ zero);
         return x;
     }
+    
+    static public String customFormat(String pattern, double value ) {
+      DecimalFormat myFormatter = new DecimalFormat(pattern);
+      myFormatter.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.ENGLISH));
+      String output = myFormatter.format(value);
+      return (output);
+   }
 }
