@@ -19,7 +19,7 @@ public class Driver extends Application {
     GridPane grid;
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("JavaFX Welcome");
+        primaryStage.setTitle("Metody Numeryczne 2013/2014");
         initLayout();
         Scene scene = new Lab01(grid);
         scene.getStylesheets().add("linechartsample/Chart.css"); 
