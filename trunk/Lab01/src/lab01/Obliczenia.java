@@ -17,17 +17,19 @@ public class Obliczenia {
 
     public Obliczenia(int nrFunkcji) {
         funkcja = new Funkcja(nrFunkcji);
-        licz();
-        funkcja = new Funkcja(nrFunkcji);
+//        licz();
+//        funkcja = new Funkcja(nrFunkcji);
     }
     public final void licz() {
-        for (int i = 1; i <= 3; i++) {
+        int i=1;
+        while (!Double.isNaN(new Funkcja(i).getFunkcja(0.0))) {
             funkcja = new Funkcja(i);
-            System.out.println("-----Równanie numer " + (i) + ": ------");
+            System.out.println("----- Równanie numer " + (i) + ": ------");
             metodaBezmyslnejIteracji(START);
             metodaBisekcji(START);
             metodaStycznych(START);
-            System.out.println("-----------------------------\n");
+            System.out.println("------------------------------\n");        
+            i++;
         }
     }
 
@@ -72,21 +74,35 @@ public class Obliczenia {
             count++;
 //	System.out.println(count + ". Przedział: [" + a + " .. " + b + "]");
         }
-        System.out.println("\nMetoda bisekcji:");
+        System.out.println("Metoda bisekcji:");
         System.out.println("X po " + count + " iteracjach wyniósł: " + (a + b) / 2);
         return (a+b)/2;
     }
 
     public double metodaStycznych(double x) {
-      double y=metodaStycznychHelper(x);
-      if(y<=START && y<=END ){
-          return y;
-      }
-      else {
-          return metodaStycznychHelper(END);
-      }
+        double y = metodaStycznychHelper(x);
+        if (START <= y && y <= END) {
+            return y;
+        } else {
+            System.out.println("ERROR: Y poza zakresem");
+            y = metodaStycznychHelper(END);
+            if (START <= y && y <= END) {
+                return y;
+            } else {
+                System.out.println("ERROR: Y poza zakresem");
+                y = metodaStycznychHelper(START + (Math.abs(END - START)) / 2);
+                if (START <= y && y <= END) {
+                    return y;
+                } else {
+                    System.out.println("ERROR: Y poza zakresem");
+                    System.out.println("BRAK ROZWIĄZANIA");
+                    return Double.NaN;
+                }
+            }
+        }
     }
     private double metodaStycznychHelper(double x) {
+        double z=x;
         int i;
         for (i = 0; i < MAX_ITERACJE; i++) {
             double mianownik = wybranaPochodna(x);
@@ -100,10 +116,10 @@ public class Obliczenia {
             }
             x = newtonX;
         }
-        System.out.println("\nMetoda stycznych:");
+        System.out.println("Metoda stycznych dla argumentu x="+z);
         System.out.println("X po " + i + " iteracjach wyniósł: " + x);
         String zero = customFormat("###.#######################", wybranaFunkcja(x));
-        System.out.println("f("+x+")x wynosi "+ zero);
+        System.out.println("f("+x+") wynosi "+ zero);
         return x;
     }
     static public String customFormat(String pattern, double value ) {

@@ -30,7 +30,6 @@ public class Lab01 extends Scene {
     private GridPane grid;
     private Button btn;
     private LineChart<Number,Number> lineChart;
-    private Obliczenia obliczenia;
     private TextField startTextField;
     private TextField endTextField;
     private TextField epsilonTextField;
@@ -80,6 +79,9 @@ public Lab01(GridPane parent) {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                System.out.println("     ===================");
+                System.out.println("     ------ODŚWIEŻ------");
+                System.out.println("     ===================");
                 if (!startTextField.getText().trim().isEmpty()){
                     START = Double.parseDouble(startTextField.getText());
                 }
@@ -92,66 +94,52 @@ public Lab01(GridPane parent) {
                 if (!iteracjeTextField.getText().trim().isEmpty()) {
                     MAX_ITERACJE = Integer.parseInt(iteracjeTextField.getText());
                 }
-                grid.getChildren().clear();
-                initGUI();
+                createChart();
             }
         });
     }
     
     private void createChart() {
-        NumberAxis xAxis = new NumberAxis();
+        NumberAxis xAxis;
+        xAxis = new NumberAxis(START, END, STEP);
         NumberAxis yAxis = new NumberAxis();
         lineChart = new LineChart<>(xAxis,yAxis);
         lineChart.setPrefSize(1200, 675);
         lineChart.setTitle("Wykresy funkcji dla zadania nr 1");      
         lineChart.setCreateSymbols(true);     
         lineChart.setAlternativeRowFillVisible(true);
-        
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("Funkcja nr 1");
-        Funkcja funkcja = new Funkcja(1);
-        for (double x=START; x<END; x=x+STEP) {
-            double y = funkcja.getFunkcja(x);
-            series1.getData().add(new XYChart.Data(x, y));
-        }
-        lineChart.getData().add(series1);
-        XYChart.Series punkt1 = new XYChart.Series();
-        punkt1.setName("Pierw. nr 1");
-        obliczenia = new Obliczenia(1);
-        double pierwiastek1 = obliczenia.metodaStycznych(START);
-        punkt1.getData().add(new XYChart.Data(pierwiastek1, 0.0));
-        lineChart.getData().add(punkt1);
 
-        XYChart.Series series2 = new XYChart.Series();
-        series2.setName("Funkcja nr 2");
-        funkcja = new Funkcja(2);
-        for (double x=START; x<END; x=x+STEP) {
-            double y = funkcja.getFunkcja(x);
-            series2.getData().add(new XYChart.Data(x, y));
+        int m=1;
+        while (!Double.isNaN(new Funkcja(m).getFunkcja(0.0))) {
+            createSeries(m);
+            m++;
         }
-        lineChart.getData().add(series2);
-        XYChart.Series punkt2 = new XYChart.Series();
-        punkt2.setName("Pierw. nr 2");
-        obliczenia = new Obliczenia(2);
-        double pierwiastek2 = obliczenia.metodaStycznych(START);
-        punkt2.getData().add(new XYChart.Data(pierwiastek2, 0.0));
-        lineChart.getData().add(punkt2);
-        
-        XYChart.Series series3 = new XYChart.Series();
-        series3.setName("Funkcja nr 3");
-        funkcja = new Funkcja(3);
-        for (double x=START; x<END; x=x+STEP) {
-            double y = funkcja.getFunkcja(x);
-            series3.getData().add(new XYChart.Data(x, y));
-        }
-        lineChart.getData().add(series3);
-        XYChart.Series punkt3 = new XYChart.Series();
-        punkt3.setName("Pierw. nr 3");
-        obliczenia = new Obliczenia(3);
-        double pierwiastek3 = obliczenia.metodaStycznych(START);
-        punkt3.getData().add(new XYChart.Data(pierwiastek3, 0.0));
-        lineChart.getData().add(punkt3);
-        
         grid.add(lineChart, 0, 2, 9, 1);
+    }
+    
+    private void createSeries(int i) {
+        XYChart.Series series = new XYChart.Series();
+        series.setName("Funkcja nr "+i);
+        Funkcja funkcja = new Funkcja(i);
+        for (double x=START; x<END; x=x+STEP) {
+            double y = funkcja.getFunkcja(x);
+            series.getData().add(new XYChart.Data(x, y));
+        }
+        lineChart.getData().add(series);
+        Obliczenia obliczenia = new Obliczenia(i);
+        System.out.println("----- Równanie numer " + (i) + ": ------");
+        obliczenia.metodaBezmyslnejIteracji(START);
+        obliczenia.metodaBisekcji(START);
+        double pierwiastek = obliczenia.metodaStycznych(START);
+        System.out.println("------------------------------\n");
+        XYChart.Series punkt = new XYChart.Series();
+        if (!Double.isNaN(pierwiastek)) {
+            punkt.setName("Pierw. nr "+i+" ="+pierwiastek);
+            punkt.getData().add(new XYChart.Data(pierwiastek, 0.0));
+        }
+        else {
+            punkt.setName("Brak pierw. nr "+i);
+        }
+        lineChart.getData().add(punkt);
     }
 }
